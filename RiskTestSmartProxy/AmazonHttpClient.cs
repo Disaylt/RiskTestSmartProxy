@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace RiskTestSmartProxy
 {
-    public class AmazonHttpClient : IMarketplaceParser
+    public class AmazonHttpClient : ProxyClient, IMarketplaceParser
     {
+        public AmazonHttpClient(List<ProxyData> proxies) : base(proxies)
+        {
+        }
 
         public async Task<string> GetHtmlProductPage(string adrticle)
         {
             var handler = new HttpClientHandler();
+            handler.UseProxy = true;
+            handler.Proxy = ChooseProxy();
 
             using (var httpClient = new HttpClient(handler))
             {
