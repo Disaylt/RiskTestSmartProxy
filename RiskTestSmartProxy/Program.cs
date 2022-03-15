@@ -52,7 +52,7 @@ namespace RiskTestSmartProxy
             int parsCount = ReadNumPars();
             for (int parsNum = 0; parsNum < parsCount; parsNum++)
             {
-                int chooseNumMarket = random.Next(0, 1);
+                int chooseNumMarket = random.Next(0, 2);
                 Markets marketplace = (Markets)chooseNumMarket;
                 string article = ChooseArticle(random, marketplace);
                 string pageContent = await marketsAndParser[marketplace].GetHtmlProductPage(article);
